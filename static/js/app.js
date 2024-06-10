@@ -1,84 +1,43 @@
-// Build the metadata panel
-function buildMetadata(sample) {
-  d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
+// The url with data
+const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json"
 
-    // get the metadata field
-
-
-    // Filter the metadata for the object with the desired sample number
-
-
-    // Use d3 to select the panel with id of `#sample-metadata`
-
-
-    // Use `.html("") to clear any existing metadata
-
-
-    // Inside a loop, you will need to use d3 to append new
-    // tags for each key-value in the filtered metadata.
-
-  });
-}
-
-// function to build both charts
-function buildCharts(sample) {
-  d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
-
-    // Get the samples field
-
-
-    // Filter the samples for the object with the desired sample number
-
-
-    // Get the otu_ids, otu_labels, and sample_values
-
-
-    // Build a Bubble Chart
-
-
-    // Render the Bubble Chart
-
-
-    // For the Bar Chart, map the otu_ids to a list of strings for your yticks
-
-
-    // Build a Bar Chart
-    // Don't forget to slice and reverse the input data appropriately
-
-
-    // Render the Bar Chart
-
-  });
-}
-
-// Function to run on page load
+// Display the default plots
 function init() {
-  d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
-    // Get the names field
+    // Use D3 to select the dropdown menu
+    let dropdownMenu = d3.select("#selDataset");
 
+    // Fetch the JSON data and console log it
+    d3.json(url).then((data) => {
+        console.log(`Data: ${data}`);
 
-    // Use d3 to select the dropdown with id of `#selDataset`
+        // An array of id names
+        let names = data.names;
 
+        // Iterate through the names Array
+        names.forEach((name) => {
+            // Append each name as an option to the drop down menu
+            // This is adding each name to the html file as an option element with value = a name in the names array
+            dropdownMenu.append("option").text(name).property("value", name);
+        });
 
-    // Use the list of sample names to populate the select options
-    // Hint: Inside a loop, you will need to use d3 to append a new
-    // option for each sample name.
+        // Assign the first name to name variable
+        let name = names[0];
 
-
-    // Get the first sample from the list
-
-
-    // Build charts and metadata panel with the first sample
-
-  });
+        // Call the functions to make the demographic panel, bar chart, and bubble chart
+        demo(name);
+        bar(name);
+        bubble(name);
+        gauge(name);
+    });
 }
 
-// Function for event listener
-function optionChanged(newSample) {
-  // Build charts and metadata panel each time a new sample is selected
-
+// Toggle to new plots when option changed
+function optionChanged(selectedValue) {
+    demo(selectedValue);
+    bar(selectedValue);
+    bubble(selectedValue);
+    gauge(selectedValue)
 }
 
-// Initialize the dashboard
 init();
