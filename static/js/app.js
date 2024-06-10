@@ -89,7 +89,7 @@ function bar(selectedValue) {
             text: obj.otu_labels.slice(0,10).reverse(),
             type: "bar",
             marker: {
-                color: "rgb(166,172,237)"
+                color: "rgb(230, 138, 160)"
             },
             orientation: "h"
         }];
@@ -98,6 +98,44 @@ function bar(selectedValue) {
         Plotly.newPlot("bar", trace);
     });
 }
+
+// Make the bubble chart
+function bubble(selectedValue) {
+    // Fetch the JSON data and console log it
+    d3.json(url).then((data) => {
+
+        // An array of sample objects
+        let samples = data.samples;
+    
+        // Filter data where id = selected value 
+        let filteredData = samples.filter((sample) => sample.id === selectedValue);
+    
+        // Assign the first object to obj variable
+        let obj = filteredData[0];
+        
+        // Trace for the data for the bubble chart
+        let trace = [{
+            x: obj.otu_ids,
+            y: obj.sample_values,
+            text: obj.otu_labels,
+            mode: "markers",
+            marker: {
+                size: obj.sample_values,
+                color: obj.otu_ids,
+                colorscale: "Sunset"
+            }
+        }];
+    
+        // Apply the x-axis lengend to the layout
+        let layout = {
+            xaxis: {title: "OTU ID"}
+        };
+    
+        // Use Plotly to plot the data in a bubble chart
+        Plotly.newPlot("bubble", trace, layout);
+    });
+}
+
 
 // Toggle to new plots when option changed
 function optionChanged(selectedValue) {
