@@ -1,3 +1,7 @@
+
+**See the dashboard on GitHub Pages:** https://rachelschoen.github.io/belly-button-challenge/
+
+
 # Background
 
 In this assignment, you will build an interactive dashboard to explore the Belly Button Biodiversity dataset
@@ -41,6 +45,3 @@ The dataset reveals that a small handful of microbial species (also called opera
     5. Update all the plots when a new sample is selected. Additionally, you are welcome to create any layout that you would like for your dashboard.
 
     6. Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo.
-
-
-**See the dashboard on GitHub Pages:** https://rachelschoen.github.io/belly-button-challenge/
